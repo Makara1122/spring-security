@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: postgres
+    password: "010104"
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/spring-security-v2-db
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop # or update
+    generate-ddl: true
+  springdoc:
+    swagger-ui:
+      path: /
