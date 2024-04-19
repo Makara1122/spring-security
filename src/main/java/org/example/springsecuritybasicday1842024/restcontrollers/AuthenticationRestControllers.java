@@ -1,18 +1,25 @@
 package org.example.springsecuritybasicday1842024.restcontrollers;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.RequiredArgsConstructor;
+import org.example.springsecuritybasicday1842024.model.dto.UserRequest;
+import org.example.springsecuritybasicday1842024.model.dto.UserResponse;
+import org.example.springsecuritybasicday1842024.service.UserService;
+import org.example.springsecuritybasicday1842024.utils.BaseResponse;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class AuthenticationRestControllers {
 
-    @GetMapping("/login")
-    public String login() {
-        return "login successfully";
+    private final UserService userService;
+
+    @PostMapping("/register")
+    public BaseResponse<UserResponse> register(@RequestBody UserRequest userRequest){
+        return BaseResponse.<UserResponse>createSuccess().setPayload(userService.createUser(userRequest));
     }
 
-    @GetMapping("/sign-up")
-    public String signUp() {
-        return "sign-up successfully";
-    }
+
 }
