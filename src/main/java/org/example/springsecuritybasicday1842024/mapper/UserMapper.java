@@ -19,7 +19,7 @@ public interface UserMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "email", source = "userRequest.email"),
             @Mapping(target = "password", source = "userRequest.password"),
-            @Mapping(target = "roles", source = "roles"),
+            @Mapping(target = "roles", source = "roles"), //expression = "java(mapRoles(user.getRoles()))"
     })
     // convert from user request to user
     User userRequestToUser(UserRequest userRequest, Set<Role> roles);

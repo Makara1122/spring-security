@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
+        System.out.println(userRequest);
 
         if (userRepository.existsByEmail(userRequest.email())) {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService{
 
         userRequest.roles().forEach(r->{
             var roleObject = roleRepository.findByName(r).orElseThrow(()->new ResponseStatusException(HttpStatus.BAD_REQUEST, "Role not found"));
+            roles.add(roleObject);
         });
 
         User newUser = userMapper.userRequestToUser(userRequest,roles);
